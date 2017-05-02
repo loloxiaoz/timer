@@ -1,0 +1,54 @@
+modules: 
+    - !R.module &base_svc
+        name: "base_svc"
+        res:
+            - !R.nginx
+                sudo : True 
+
+    - !R.module &pylon_action
+        name: "pylon_action"
+        res:
+            - !R.vars
+                RUN_PATH    : "${PRJ_ROOT}/run/${APP_SYS}"
+            - !R.nginx_conf_tpl  
+                tpl: "${PRJ_ROOT}/conf/options/tpl_${APP_SYS}_ngx.conf" 
+                dst: "${PRJ_ROOT}/conf/used/${USER}_${PRJ_KEY}_${APP_SYS}_ngx.conf" 
+                sudo: True
+            - !R.fpm_svc
+                fpm_conf: "${ENV}"
+            - !R.autoload 
+                src:  "${PYLON}/:${MODULES}"
+            - !R.action2
+                src: "${PRJ_ROOT}/src/apps/${APP_SYS}"
+
+    - !R.module &pylon_rest
+        name: "pylon_rest"
+        res:
+            - !R.vars
+                RUN_PATH    : "${PRJ_ROOT}/run/${APP_SYS}"
+            - !R.nginx_conf_tpl  
+                tpl: "${PRJ_ROOT}/conf/options/tpl_${APP_SYS}_ngx.conf" 
+                dst: "${PRJ_ROOT}/conf/used/${USER}_${PRJ_KEY}_${APP_SYS}_ngx.conf" 
+                sudo: True
+            - !R.fpm_svc
+                fpm_conf: "${ENV}"
+            - !R.autoload 
+                src:  "${PYLON}/:${MODULES}"
+            - !R.rest
+                src: "${PRJ_ROOT}/src/apps/${APP_SYS}"
+
+
+    - !R.module &pylon_php        
+        name: "pylon_php"
+        res:
+            - !R.vars
+                RUN_PATH    : "${PRJ_ROOT}/run/${APP_SYS}"
+            - !R.autoload 
+                src:  "${PYLON}/:${MODULES}"
+    - !R.module &console_php        
+        name: "console_php"
+        res:
+            - !R.vars
+                RUN_PATH    : "${PRJ_ROOT}/run/${APP_SYS}"
+            - !R.autoload 
+                src:  "${PYLON}/:${MODULES}"

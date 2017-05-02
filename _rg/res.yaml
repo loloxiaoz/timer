@@ -1,0 +1,170 @@
+#!import "./module.yaml"
+reusable:
+    - !R.vars  &u_demo_svc
+        API_PROXY:      ""
+        GDICT_API:   "api.game.corp.qihoo.net:8360"
+    - !R.vars  &u_beta_svc
+        API_PROXY:      ""
+        GDICT_API:   "api.game.corp.qihoo.net:8360"
+    - !R.vars  &u_online_svc
+        API_PROXY:      ""
+        GDICT_API:   "api.game.corp.qihoo.net:8360"
+
+    - !R.vars  &u_svc_mode
+        USER:           "online"
+        PRJ_HOME:       "/home/q/system/mara_cron/"
+        GDICT_API:   "api.game.corp.qihoo.net:8360"
+
+
+
+__env:
+    cache: !R.vars  &u_cache
+        API_PROXY:      "http://127.0.0.1:8086"
+
+    debug: !R.vars  &u_debug
+        PHP_ERROR:      "E_ALL & ~E_NOTICE"
+        PYL_LOG_MODE :  "DEBUG"
+        DEBUG        : 1
+
+    ndebug: !R.vars  &u_ndebug
+        PHP_ERROR:      "E_ERROR"
+        PYL_LOG_MODE :  "ONLINE"
+        DEBUG        :
+    dev: !R.env
+        res:
+            - !R.using
+                refs:
+                    - *u_demo_svc
+                    - *u_debug
+            - !R.vars
+                UUID_IDC:       "test"
+                ENV:            "dev"
+                DOMAIN_PREFIX:  "${USER}."
+                PRJ_ROOT:       "${HOME}/devspace/mara_cron/"
+                WORKER_CNT  :   1
+                WATCHER_CNT :   2
+                REDIS_MASTER_HOST:   "redis.demo.1360.com"
+                REDIS_MASTER_PORT:   "6379"
+
+    demo: !R.env
+        res:
+            - !R.using
+                refs:
+                    - *u_ndebug
+                    - *u_demo_svc
+                    - *u_svc_mode
+            - !R.vars
+                UUID_IDC:       "test"
+                ENV:            "demo"
+                DOMAIN_PREFIX:  "demo."
+                PRJ_ROOT:       "/home/q/system/mara_cron/"
+                WORKER_CNT  :   1
+                WATCHER_CNT :   1
+                REDIS_MASTER_HOST:   "redis.demo.1360.com"
+                REDIS_MASTER_PORT:   "6379"
+
+    beta: !R.env
+        res:
+            - !R.using
+                refs:
+                    - *u_ndebug
+                    - *u_beta_svc
+                    - *u_svc_mode
+            - !R.vars
+                UUID_IDC:       "test"
+                ENV:            "beta"
+                DOMAIN_PREFIX:  "beta."
+                PRJ_ROOT:       "/home/q/system/mara_cron/"
+                WORKER_CNT  :   1
+                WATCHER_CNT :   1
+                REDIS_MASTER_HOST:   "redis.demo.1360.com"
+                REDIS_MASTER_PORT:   "6379"
+
+    online: !R.env
+        res:
+            - !R.using
+                refs:
+                    - *u_ndebug
+                    - *u_online_svc
+                    - *u_svc_mode
+                    - *u_cache
+            - !R.vars
+                UUID_IDC:       "ccp"
+                ENV:            "online"
+                DOMAIN_PREFIX:  ""
+                PRJ_ROOT:       "/home/q/system/mara_cron/"
+                WORKER_CNT  :   4
+                WATCHER_CNT :   1
+                REDIS_MASTER_HOST:   "rdb01.gamep.vnet.qihoo.net"
+                REDIS_MASTER_PORT:   "26379"
+                #REDIS_SLAVE_HOST:    "rdb02.gamep.vnet.qihoo.net" 优先切换使用bjdt
+                #REDIS_SLAVE_PORT:    "26379"
+
+    online_bak: !R.env
+        res:
+            - !R.vars
+                # backup for redis (bjdt)
+                REDIS_MASTER_HOST:   "rdb1.gamep.bjdt.qihoo.net"
+
+__prj: !R.prj
+       res:
+        - !R.vars
+                PRJ_NAME:       "mara_cron"
+                PRJ_KEY:        "mara_cron"
+                PYLON  :        "/home/q/php/pylon_22"
+                MODULES:        "${PRJ_ROOT}/src/logic:/home/q/php/qhydra_sdk:/home/q/php/svc_utls:${PRJ_ROOT}/conf/used:/home/q/php/kafka_client/lib/"
+                PHP_INI:        "${PRJ_ROOT}/conf/used/php.ini"
+
+        - !R.path
+            dst :  "${PRJ_ROOT}/conf/used/"
+        - !R.path
+            dst :  "${PRJ_ROOT}/tmp/"
+        - !R.file_tpl
+            tpl : "${PRJ_ROOT}/conf/options/tpl_php.ini"
+            dst : "${PHP_INI}"
+
+        - !R.nginx
+            sudo : True
+
+__sys:
+
+    front: !R.system2
+            res:
+                - !R.vars
+                    APP_SYS         : "front"
+                    DOMAIN          : "${DOMAIN_PREFIX}cron.w-svc.cn"
+                    TPL_FNT_DIR     : "${PRJ_ROOT}/src/web_inf/front/tpls"
+                    MODULES         : "${MODULES}:${PRJ_ROOT}/src/apps/front"
+                - !R.using
+                    ref :  *pylon_action
+                - !R.rest
+                    src: "${PRJ_ROOT}/src/"
+
+    console :  !R.system2
+            res:
+                - !R.vars
+                    APP_SYS         : "console"
+                    MODULES         : "${MODULES}:${PRJ_ROOT}/src/apps/console"
+                - !R.using
+                    ref : *console_php
+                - !R.daemon_php
+                    script:     "${PRJ_ROOT}/src/apps/console/mara_cron_worker.php"
+                    MODULES:    "${MODULES}:${PRJ_ROOT}/src/apps/console"
+                    worker : ${WORKER_CNT}
+                - !R.daemon_php
+                    script:     "${PRJ_ROOT}/src/apps/console/mara_cron_watcher.php"
+                    MODULES:    "${MODULES}:${PRJ_ROOT}/src/apps/console"
+                    worker : ${WATCHER_CNT}
+
+    test:  !R.system2
+            res:
+                - !R.vars
+                    DOMAIN          : "${DOMAIN_PREFIX}cron.w-svc.cn"
+                    APP_SYS: "test"
+                    PRJ_INCLUDE: "${PRJ_ROOT}/conf:${PRJ_ROOT}/src/apps/console/:${PRJ_ROOT}/src/"
+                    MODULES         : "${MODULES}:${PRJ_ROOT}/test/:/usr/local/php-5.3/lib/php"
+                - !R.using
+                    ref : *pylon_php
+                - !R.phpunit2
+                    include_path: "${PYLON}:${MODULES}:/home/q/php"
+                    path: "test"
