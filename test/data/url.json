@@ -1,0 +1,15 @@
+<?php
+
+$callback = array(
+     'type' => 'http',
+     'params' => array(
+         'method" => "get",
+         'url' => '/cb.php',
+         'host' => '127.0.0.1',
+         'port' => '80',
+         'domain' => 'abc.com',
+         'result' => '',
+     )
+     'timeout' => '',
+     'retry' => ''
+);
