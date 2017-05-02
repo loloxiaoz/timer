@@ -23,37 +23,7 @@ class CallbackUtil
         }
     }
 
-    /*
-    $callback = array(
-        'type' => 'http',
-        'params' => array(
-            'method" => "get",
-            'url' => '/cb.php',
-            'host' => '127.0.0.1',
-            'port' => '80',
-            'domain' => 'abc.com',
-            'result' => '',
-        )
-        'timeout' => '',
-        'retry' => ''
-    )
-    $callback = array(
-        'type' => 'http',
-        'params' => array(
-            'method" => "post",
-            'url' => '/cb.php',
-            'host' => '127.0.0.1',
-            'port' => '80',
-            'domain' => 'abc.com',
-            'result' => '',
-            'data' => array (
-                "key" => "value"
-            )
-        )
-        'timeout' => '',
-        'retry' => ''
-     */
-    static private function isValidHttpCallback($callback)
+     static private function isValidHttpCallback($callback)
     {
         $params = $callback["params"];
         if (!$params) {

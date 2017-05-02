@@ -3,7 +3,7 @@ _env:
         _name    : "define"
         _res :
             - !R.vars
-                PRJ_NAME    : "mara_match"
+                PRJ_NAME    : "mara_cron"
             - !R.include
                 _path :
                     - "/data/x/etc/mara_env/rigger/mara_v2.yaml"
@@ -14,7 +14,7 @@ _env:
         _res :
             - !R.vars
                 BASE_INCLUDE : "${PRJ_ROOT}/src/bizlogic:${SDKS_PATH}:${MARA_LIBS}"
-                CONF_FILE    : "/data/x/etc/env_conf/projects/match.json"
+                CONF_FILE    : "/data/x/etc/env_conf/projects/cron.json"
                 PORT         : "8086"
 
     - !R.env
@@ -30,7 +30,7 @@ _env:
         _mix     : "define,_ci_deploy,_ci,base"
         _res :
             - !R.vars
-                BASE_DOMAIN         : "match.ci.mararun.cn"
+                BASE_DOMAIN         : "cron.ci.mararun.cn"
                 MARA_SDKS           : "/data/jenkins/workspace/mara_sdks/src"
 
     - !R.env
@@ -38,37 +38,35 @@ _env:
         _mix     : "define,_project_deploy,_lab,base"
         _res :
             - !R.vars
-                BASE_DOMAIN         : "match.lab.mararun.cn"
+                BASE_DOMAIN         : "cron.lab.mararun.cn"
 
     - !R.env
         _name    : "demo"
         _mix     : "define,_project_deploy,_demo,base"
         _res :
             - !R.vars
-                BASE_DOMAIN         : "match.demo.mararun.cn"
+                BASE_DOMAIN         : "cron.demo.mararun.cn"
 
     - !R.env
         _name    : "test"
         _mix     : "define,_project_deploy,_test,base"
         _res :
             - !R.vars
-                BASE_DOMAIN         : "match.test.mararun.cn"
+                BASE_DOMAIN         : "cron.test.mararun.cn"
 
     - !R.env
         _name    : "beta"
         _mix     : "define,_project_deploy,_beta,base"
         _res :
             - !R.vars
-                _json             : "${CONF_FILE}:/match/mara/online"
-                BASE_DOMAIN       : "match.beta.mararun.cn"
+                BASE_DOMAIN       : "cron.beta.mararun.cn"
 
     - !R.env
         _name    : "online"
         _mix     : "define,_project_deploy,_online,base"
         _res :
             - !R.vars
-                _json       : "${CONF_FILE}:/match/mara/online"
-                BASE_DOMAIN : "match.mararun.cn"
+                BASE_DOMAIN : "cron.mararun.cn"
 
 _sys:
     -  !R.system
@@ -103,18 +101,10 @@ _sys:
                 args  : !R.vars
                     INCLUDE_PATH : "${PRJ_ROOT}/src/sys_console:${BASE_INCLUDE}"
             - !R.daemon_php
-                script:  "${PRJ_ROOT}/src/sys_console/apply_worker.php"
-                tag   :  "apply"
-                worker:  5
+                script : "${PRJ_ROOT}/src/apps/console/mara_cron_worker.php"
+                MODULES: "${MODULES}:${PRJ_ROOT}/src/apps/console"
+                worker : 1
             - !R.daemon_php
-                script:  "${PRJ_ROOT}/src/sys_console/pay_worker.php"
-                tag   :  "pay"
-            - !R.daemon_php
-                script:  "${PRJ_ROOT}/src/sys_console/supervise_worker.php"
-                tag   :  "check"
-            - !R.file_tpl
-                tpl   : "${PRJ_ROOT}/conf/options/console.cron"
-                dst   : "${PRJ_ROOT}/conf/used/console.cron"
-                    #            - !R.crontab
-                    #                key   : "match_crontab"
-                    #                cron  : "${PRJ_ROOT}/conf/used/console.cron"
+                script : "${PRJ_ROOT}/src/apps/console/mara_cron_watcher.php"
+                MODULES: "${MODULES}:${PRJ_ROOT}/src/apps/console"
+                worker : 1

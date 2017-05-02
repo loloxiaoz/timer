@@ -257,28 +257,6 @@ class DateDiff
 
 }
 
-class MoneyUtls
-{
-    static public function fenToYuan( $fen )
-    {
-        if ( empty( $fen ) || !is_numeric( $fen ) )
-        {
-            return 0;
-        }
-        $result = number_format( $fen / 100, 0, '', '' );
-        return $result;
-    }
-    static public function yuanToFen( $yuan )
-    {
-        if ( empty( $yuan ) || !is_numeric( $yuan ) )
-        {
-            return 0;
-        }
-        $result = number_format( $yuan * 100, 0, '', '' );
-        return $result;
-    }
-}
-
 class TimeUtil
 {
     static public function mktime($time)

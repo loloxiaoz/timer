@@ -3,7 +3,7 @@
 /*
  * @brief 定时计划的相关逻辑处理
  */
-class TimerSvc 
+class TimerSvc
 {
     private $logger = null;
 
@@ -26,7 +26,7 @@ class TimerSvc
     public function add($appName,$id,$time,$rule,$callback)
     {
         if (empty($callback)) {
-            throw new Exception("[".__CLASS__."::".__FUNCTION__."] callback is null");
+            throw new Exception("callback is null");
         }
 
         $expireTimestamp = $time;
@@ -46,10 +46,10 @@ class TimerSvc
      *
      * @return true 表示更新成功，false表示更新失败
      */
-    public function update($timer) 
+    public function update($timer)
     {
         if (!$timer || !is_object($timer)) {
-            throw new InvalidArgumentException("[".__CLASS__."::".__FUNCTION__."] param timer is null");
+            throw new InvalidArgumentException("param timer is null");
         }
 
         return TimerDao::ins()->update($timer);
@@ -76,7 +76,7 @@ class TimerSvc
      *
      * @return timer
      */
-    public function getByTimerId($timerId) 
+    public function getByTimerId($timerId)
     {
         return TimerDao::ins()->get($timerId);
     }
@@ -105,14 +105,14 @@ class TimerSvc
     public function delByTimerId($timerId)
     {
         $logger = XLogKit::logger("scope");
-        $logger->info("[".__CLASS__."::".__FUNCTION__."]: timerId ".$timerId);
+        $logger->info("timerId ".$timerId);
         return TimerDao::ins()->del($timerId);
     }
 
     /*
      * @brief 获取到点的定时任务
      */
-    public function getExpireTimer() 
+    public function getExpireTimer()
     {
         return TimerDao::ins()->getExpireTimer();
     }

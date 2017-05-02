@@ -1,11 +1,11 @@
 _dev:
     - !C.project
-        name : "mara_match"
+        name : "mara_cron"
         root : "./"
     - !C.version
         file : "src/version.txt"
     - !C.git
-        remote : "git@git.mararun.cn:mara/mara_match.git"
+        remote : "git@git.mararun.cn:mara/mara_cron.git"
     - !C.sonar
         runner   : "/data/sonar-scanner/bin/sonar-scanner"
         qube     : "http://10.26.101.134:9000"

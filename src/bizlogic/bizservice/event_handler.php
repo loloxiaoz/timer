@@ -120,9 +120,7 @@ class CronEventHandler
         $stime     = microtime(true);
         try {
             $msgJson = json_decode($msg,true);
-
             $r = $this->logicHandle($msgJson);
-
             $etime     = microtime(true);
             $totalTime = sprintf("%.3f", $etime-$stime);
 

@@ -1,14 +1,14 @@
 <?php
 
-class cron_timer extends XSimpleRest implements XService 
-{       
+class cron_timer extends XSimpleRest implements XService
+{
     public function __construct()
     {
         $this->timerSvc = new TimerSvc();
         $this->logger = XLogKit::logger("scope");
     }
 
-    public function add($request,$xcontext) 
+    public function add($request,$xcontext)
     {
         $app = $request->app;
         if (!$app) {
@@ -28,35 +28,6 @@ class cron_timer extends XSimpleRest implements XService
             return;
         }
 
-        /*
-        $callback = array(
-            'type' => 'http',
-            'params' => array(
-                'method" => "get",
-                'url' => '/cb.php',
-                'host' => '127.0.0.1',
-                'port' => '80',
-                'domain' => 'abc.com',
-            )
-            'timeout' => '',
-            'retry' => ''
-         )
-        $callback = array(
-            'type' => 'http',
-            'params' => array(
-                'method" => "post",
-                'url' => '/cb.php',
-                'host' => '127.0.0.1',
-                'port' => '80',
-                'domain' => 'abc.com',
-                'data' => array (
-                    "key" => "value"
-                )
-            )
-            'timeout' => '',
-            'retry' => ''
-        )
-         */
         $callback = $request->callback;
         if (!$callback) {
             $xcontext->_result->error("callback is null", CronErrCode::PARAM_ERROR,401);
@@ -82,7 +53,7 @@ class cron_timer extends XSimpleRest implements XService
                 $xcontext->_result->error("add timer fail", CronErrCode::BIZ_ERROR,401);
                 return;
             }
-            
+
             $msg = json_encode($timer->getPropArray());
             $xcontext->_result->success($msg);
             $this->logger->info("[".__CLASS__."::".__FUNCTION__ . "] ${msg}");
@@ -92,7 +63,7 @@ class cron_timer extends XSimpleRest implements XService
         }
     }
 
-    public function get($request,$xcontext) 
+    public function get($request,$xcontext)
     {
         $id = $request->id;
         $app = $request->app;
@@ -121,7 +92,7 @@ class cron_timer extends XSimpleRest implements XService
         }
     }
 
-    public function del($request,$xcontext) 
+    public function del($request,$xcontext)
     {
         $id = $request->id;
         $app = $request->app;
