@@ -13,3 +13,5 @@ _notes
 .rigger.dat
 phpunit.xml.dist
 run.log
+test/report/*
+test/reports/*

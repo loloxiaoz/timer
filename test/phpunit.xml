@@ -5,7 +5,7 @@
             <directory suffix="timer_svc_test.php">cases</directory>
             <directory suffix="stat_svc_test.php">cases</directory>
             <directory suffix="notifier_test.php">cases</directory>
-            <directory suffix="watcher_test.php">cases</directory>
+            <directory suffix="watcher_svc_test.php">cases</directory>
             <directory suffix="crontab_parse_test.php">cases</directory>
         </testsuite>
     </testsuites>

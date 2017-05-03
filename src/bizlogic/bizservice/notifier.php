@@ -61,15 +61,16 @@ class HttpNotifier implements Notifier
 
         // 如果没有指定expect的result，那么只要http code是[200,300)，结果不为空，那么表示成功
         if (empty($expectResult)) {
+            $this->logger->info("http call succ, result=" . json_encode($result));
             return true;
         }
-
 
         // 提取结果的data数据进行匹配
         if ($expectResult != $result) {
             $this->logger->warn("http call fail, result not match, timer=" . json_encode($timer->getPropArray()) . " result=${result}");
             return false;
         }
+        $this->logger->info("http call succ, result=" . json_encode($result));
         return true;
     }
 
