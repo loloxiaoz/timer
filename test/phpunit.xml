@@ -1,0 +1,22 @@
+<phpunit bootstrap="bootstrap.php" colors="true" >
+    <testsuites>
+        <testsuite name = "cases">
+            <!-- <directory suffix="test.php">cases</directory> -->
+            <directory suffix="notifier_test.php">cases</directory>
+        </testsuite>
+    </testsuites>
+	<logging>
+	  <log type="coverage-html" target="./report" charset="UTF-8" highlight="true"/>
+	</logging>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">../src</directory>
+            <exclude>
+                    <directory suffix=".php">../src/sys_init</directory>
+                    <directory suffix=".php">../src/sys_console</directory>
+                    <file>../src/sys_api/index.php</file>
+                    <file>../src/sys_api/bootstrap.php</file>
+                </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

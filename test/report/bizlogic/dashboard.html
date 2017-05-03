@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /data/luopan/devspace/mara_cron/src/bizlogic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/nv.d3.min.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="../js/html5shiv.min.js"></script>
+  <script src="../js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../index.html">/data/luopan/devspace/mara_cron/src</a></li>
+        <li><a href="index.html">bizlogic</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="bizdomain/dao/app_dao.php.html#6">AppDao</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizdomain/dao/base_dao.php.html#5">RedisBaseDao</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizdomain/entity/app.php.html#7">App</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/app_svc.php.html#3">AppSvc</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/callback_util.php.html#6">CallbackUtil</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/event_handler.php.html#6">CronEventHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/notifier.php.html#15">HttpNotifier</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/notifier.php.html#88">NotifyHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/stat_svc.php.html#6">StatSvc</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/timer_svc.php.html#6">TimerSvc</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/crontab_parse.php.html#3">Crontab</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#2">OccurDate</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/utilitys.php.html#2">TimeUtil</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/utilitys.php.html#11">NetUtil</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="mechanism/crontab_parse.php.html#3">Crontab</a></td><td class="text-right">1406</td></tr>
+       <tr><td><a href="bizservice/callback_util.php.html#6">CallbackUtil</a></td><td class="text-right">506</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#2">OccurDate</a></td><td class="text-right">506</td></tr>
+       <tr><td><a href="bizservice/event_handler.php.html#6">CronEventHandler</a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="bizservice/timer_svc.php.html#6">TimerSvc</a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="bizdomain/dao/base_dao.php.html#5">RedisBaseDao</a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="bizservice/notifier.php.html#15">HttpNotifier</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="bizservice/app_svc.php.html#3">AppSvc</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="mechanism/utilitys.php.html#11">NetUtil</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="bizservice/notifier.php.html#88">NotifyHandler</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="bizdomain/entity/app.php.html#7">App</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="bizdomain/dao/app_dao.php.html#6">AppDao</a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="bizdomain/dao/app_dao.php.html#9"><abbr title="AppDao::ins">ins</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#8"><abbr title="OccurDate::stdHourDate">stdHourDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/timer_svc.php.html#49"><abbr title="TimerSvc::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/timer_svc.php.html#66"><abbr title="TimerSvc::getById">getById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/timer_svc.php.html#79"><abbr title="TimerSvc::getByTimerId">getByTimerId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/timer_svc.php.html#92"><abbr title="TimerSvc::delById">delById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/timer_svc.php.html#105"><abbr title="TimerSvc::delByTimerId">delByTimerId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/timer_svc.php.html#115"><abbr title="TimerSvc::getExpireTimer">getExpireTimer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/timer_svc.php.html#123"><abbr title="TimerSvc::delFromCronList">delFromCronList</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/crontab_parse.php.html#24"><abbr title="Crontab::parse">parse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/crontab_parse.php.html#134"><abbr title="Crontab::_search">_search</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/crontab_parse.php.html#165"><abbr title="Crontab::_parseCronNumbers">_parseCronNumbers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#4"><abbr title="OccurDate::stdDate">stdDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#12"><abbr title="OccurDate::simpleDate">simpleDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/timer_svc.php.html#10"><abbr title="TimerSvc::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#16"><abbr title="OccurDate::isStdDate">isStdDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#20"><abbr title="OccurDate::format">format</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#26"><abbr title="OccurDate::today">today</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#30"><abbr title="OccurDate::yesterday">yesterday</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#34"><abbr title="OccurDate::beforeHour">beforeHour</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#38"><abbr title="OccurDate::dayBefore">dayBefore</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#43"><abbr title="OccurDate::dayAfter">dayAfter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#48"><abbr title="OccurDate::cutWeeks">cutWeeks</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#60"><abbr title="OccurDate::dayCompare">dayCompare</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#69"><abbr title="OccurDate::isInScope">isInScope</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#79"><abbr title="OccurDate::intersect">intersect</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/utilitys.php.html#4"><abbr title="TimeUtil::mktime">mktime</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/timer_svc.php.html#26"><abbr title="TimerSvc::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/stat_svc.php.html#25"><abbr title="StatSvc::incrError">incrError</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizdomain/dao/base_dao.php.html#8"><abbr title="RedisBaseDao::ins">ins</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/app_svc.php.html#65"><abbr title="AppSvc::isExist">isExist</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizdomain/dao/base_dao.php.html#16"><abbr title="RedisBaseDao::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizdomain/dao/base_dao.php.html#21"><abbr title="RedisBaseDao::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizdomain/dao/base_dao.php.html#34"><abbr title="RedisBaseDao::del">del</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizdomain/dao/base_dao.php.html#40"><abbr title="RedisBaseDao::get">get</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizdomain/dao/base_dao.php.html#51"><abbr title="RedisBaseDao::isExist">isExist</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizdomain/entity/app.php.html#9"><abbr title="App::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizdomain/entity/app.php.html#20"><abbr title="App::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/app_svc.php.html#7"><abbr title="AppSvc::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/app_svc.php.html#15"><abbr title="AppSvc::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/app_svc.php.html#40"><abbr title="AppSvc::get">get</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/app_svc.php.html#52"><abbr title="AppSvc::del">del</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/callback_util.php.html#11"><abbr title="CallbackUtil::isValid">isValid</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/stat_svc.php.html#20"><abbr title="StatSvc::clearError">clearError</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/callback_util.php.html#26"><abbr title="CallbackUtil::isValidHttpCallback">isValidHttpCallback</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/event_handler.php.html#8"><abbr title="CronEventHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/event_handler.php.html#16"><abbr title="CronEventHandler::logicHandle">logicHandle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/event_handler.php.html#75"><abbr title="CronEventHandler::nofityRetry">nofityRetry</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/event_handler.php.html#106"><abbr title="CronEventHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/notifier.php.html#17"><abbr title="HttpNotifier::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/notifier.php.html#22"><abbr title="HttpNotifier::notify">notify</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/notifier.php.html#92"><abbr title="NotifyHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/notifier.php.html#98"><abbr title="NotifyHandler::notify">notify</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/notifier.php.html#113"><abbr title="NotifyHandler::isSupport">isSupport</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/stat_svc.php.html#10"><abbr title="StatSvc::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="bizservice/stat_svc.php.html#15"><abbr title="StatSvc::getAll">getAll</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="mechanism/utilitys.php.html#18"><abbr title="NetUtil::getLocalIp">getLocalIp</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="bizservice/callback_util.php.html#26"><abbr title="CallbackUtil::isValidHttpCallback">isValidHttpCallback</abbr></a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="mechanism/crontab_parse.php.html#24"><abbr title="Crontab::parse">parse</abbr></a></td><td class="text-right">306</td></tr>
+       <tr><td><a href="mechanism/crontab_parse.php.html#165"><abbr title="Crontab::_parseCronNumbers">_parseCronNumbers</abbr></a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="bizservice/event_handler.php.html#16"><abbr title="CronEventHandler::logicHandle">logicHandle</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="bizservice/event_handler.php.html#75"><abbr title="CronEventHandler::nofityRetry">nofityRetry</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="bizservice/notifier.php.html#22"><abbr title="HttpNotifier::notify">notify</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="mechanism/utilitys.php.html#18"><abbr title="NetUtil::getLocalIp">getLocalIp</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="mechanism/crontab_parse.php.html#134"><abbr title="Crontab::_search">_search</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#79"><abbr title="OccurDate::intersect">intersect</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="bizservice/callback_util.php.html#11"><abbr title="CallbackUtil::isValid">isValid</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="bizservice/app_svc.php.html#15"><abbr title="AppSvc::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="bizdomain/entity/app.php.html#9"><abbr title="App::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="bizservice/event_handler.php.html#106"><abbr title="CronEventHandler::handle">handle</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#69"><abbr title="OccurDate::isInScope">isInScope</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="bizservice/timer_svc.php.html#26"><abbr title="TimerSvc::add">add</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="bizservice/timer_svc.php.html#49"><abbr title="TimerSvc::update">update</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#48"><abbr title="OccurDate::cutWeeks">cutWeeks</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#43"><abbr title="OccurDate::dayAfter">dayAfter</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="bizdomain/dao/app_dao.php.html#9"><abbr title="AppDao::ins">ins</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="mechanism/occurdata.php.html#38"><abbr title="OccurDate::dayBefore">dayBefore</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="bizservice/notifier.php.html#113"><abbr title="NotifyHandler::isSupport">isSupport</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="bizdomain/dao/base_dao.php.html#8"><abbr title="RedisBaseDao::ins">ins</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="bizdomain/dao/base_dao.php.html#40"><abbr title="RedisBaseDao::get">get</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="bizdomain/dao/base_dao.php.html#21"><abbr title="RedisBaseDao::add">add</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="bizservice/notifier.php.html#98"><abbr title="NotifyHandler::notify">notify</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 4.0.0</a> using <a href="https://secure.php.net/" target="_top">PHP 7.0.13</a> with <a href="https://xdebug.org/">Xdebug 2.4.0RC2</a> and <a href="https://phpunit.de/">PHPUnit 5.4.7</a> at Wed May 3 15:47:18 CST 2017.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../js/jquery.min.js" type="text/javascript"></script>
+  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../js/holder.min.js" type="text/javascript"></script>
+  <script src="../js/d3.min.js" type="text/javascript"></script>
+  <script src="../js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([14,0,0,0,0,0,0,0,0,0,0,6], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([57,0,0,0,0,0,0,0,0,0,0,22], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,2,"<a href=\"bizdomain\/dao\/app_dao.php.html#6\">AppDao<\/a>"],[0,9,"<a href=\"bizdomain\/dao\/base_dao.php.html#5\">RedisBaseDao<\/a>"],[100,6,"<a href=\"bizdomain\/dao\/stat_dao.php.html#6\">StatDao<\/a>"],[100,21,"<a href=\"bizdomain\/dao\/timer_dao.php.html#6\">TimerDao<\/a>"],[0,4,"<a href=\"bizdomain\/entity\/app.php.html#7\">App<\/a>"],[100,5,"<a href=\"bizdomain\/entity\/timer.php.html#6\">Timer<\/a>"],[0,7,"<a href=\"bizservice\/app_svc.php.html#3\">AppSvc<\/a>"],[0,22,"<a href=\"bizservice\/callback_util.php.html#6\">CallbackUtil<\/a>"],[0,19,"<a href=\"bizservice\/event_handler.php.html#6\">CronEventHandler<\/a>"],[0,8,"<a href=\"bizservice\/notifier.php.html#15\">HttpNotifier<\/a>"],[0,5,"<a href=\"bizservice\/notifier.php.html#88\">NotifyHandler<\/a>"],[0,4,"<a href=\"bizservice\/stat_svc.php.html#6\">StatSvc<\/a>"],[0,13,"<a href=\"bizservice\/timer_svc.php.html#6\">TimerSvc<\/a>"],[100,0,"<a href=\"mechanism\/constants.php.html#3\">CronConstants<\/a>"],[100,0,"<a href=\"mechanism\/constants.php.html#31\">CronErrCode<\/a>"],[0,37,"<a href=\"mechanism\/crontab_parse.php.html#3\">Crontab<\/a>"],[100,9,"<a href=\"mechanism\/intercept.php.html#2\">AutoCommit<\/a>"],[0,22,"<a href=\"mechanism\/occurdata.php.html#2\">OccurDate<\/a>"],[0,1,"<a href=\"mechanism\/utilitys.php.html#2\">TimeUtil<\/a>"],[0,6,"<a href=\"mechanism\/utilitys.php.html#11\">NetUtil<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,2,"<a href=\"bizdomain\/dao\/app_dao.php.html#9\">AppDao::ins<\/a>"],[0,2,"<a href=\"bizdomain\/dao\/base_dao.php.html#8\">RedisBaseDao::ins<\/a>"],[0,1,"<a href=\"bizdomain\/dao\/base_dao.php.html#16\">RedisBaseDao::__construct<\/a>"],[0,2,"<a href=\"bizdomain\/dao\/base_dao.php.html#21\">RedisBaseDao::add<\/a>"],[0,1,"<a href=\"bizdomain\/dao\/base_dao.php.html#34\">RedisBaseDao::del<\/a>"],[0,2,"<a href=\"bizdomain\/dao\/base_dao.php.html#40\">RedisBaseDao::get<\/a>"],[0,1,"<a href=\"bizdomain\/dao\/base_dao.php.html#51\">RedisBaseDao::isExist<\/a>"],[100,2,"<a href=\"bizdomain\/dao\/stat_dao.php.html#9\">StatDao::ins<\/a>"],[100,1,"<a href=\"bizdomain\/dao\/stat_dao.php.html#17\">StatDao::incrError<\/a>"],[100,1,"<a href=\"bizdomain\/dao\/stat_dao.php.html#27\">StatDao::getAllStat<\/a>"],[100,1,"<a href=\"bizdomain\/dao\/stat_dao.php.html#34\">StatDao::clearError<\/a>"],[100,1,"<a href=\"bizdomain\/dao\/stat_dao.php.html#41\">StatDao::getErrorStatKey<\/a>"],[100,2,"<a href=\"bizdomain\/dao\/timer_dao.php.html#10\">TimerDao::ins<\/a>"],[100,5,"<a href=\"bizdomain\/dao\/timer_dao.php.html#18\">TimerDao::add<\/a>"],[100,2,"<a href=\"bizdomain\/dao\/timer_dao.php.html#57\">TimerDao::get<\/a>"],[100,3,"<a href=\"bizdomain\/dao\/timer_dao.php.html#69\">TimerDao::update<\/a>"],[100,4,"<a href=\"bizdomain\/dao\/timer_dao.php.html#95\">TimerDao::del<\/a>"],[100,2,"<a href=\"bizdomain\/dao\/timer_dao.php.html#123\">TimerDao::delFromCronList<\/a>"],[100,3,"<a href=\"bizdomain\/dao\/timer_dao.php.html#136\">TimerDao::getExpireTimer<\/a>"],[0,3,"<a href=\"bizdomain\/entity\/app.php.html#9\">App::__construct<\/a>"],[0,1,"<a href=\"bizdomain\/entity\/app.php.html#20\">App::create<\/a>"],[100,3,"<a href=\"bizdomain\/entity\/timer.php.html#8\">Timer::__construct<\/a>"],[100,2,"<a href=\"bizdomain\/entity\/timer.php.html#19\">Timer::create<\/a>"],[0,1,"<a href=\"bizservice\/app_svc.php.html#7\">AppSvc::__construct<\/a>"],[0,3,"<a href=\"bizservice\/app_svc.php.html#15\">AppSvc::add<\/a>"],[0,1,"<a href=\"bizservice\/app_svc.php.html#40\">AppSvc::get<\/a>"],[0,1,"<a href=\"bizservice\/app_svc.php.html#52\">AppSvc::del<\/a>"],[0,1,"<a href=\"bizservice\/app_svc.php.html#65\">AppSvc::isExist<\/a>"],[0,3,"<a href=\"bizservice\/callback_util.php.html#11\">CallbackUtil::isValid<\/a>"],[0,19,"<a href=\"bizservice\/callback_util.php.html#26\">CallbackUtil::isValidHttpCallback<\/a>"],[0,1,"<a href=\"bizservice\/event_handler.php.html#8\">CronEventHandler::__construct<\/a>"],[0,8,"<a href=\"bizservice\/event_handler.php.html#16\">CronEventHandler::logicHandle<\/a>"],[0,7,"<a href=\"bizservice\/event_handler.php.html#75\">CronEventHandler::nofityRetry<\/a>"],[0,3,"<a href=\"bizservice\/event_handler.php.html#106\">CronEventHandler::handle<\/a>"],[0,1,"<a href=\"bizservice\/notifier.php.html#17\">HttpNotifier::__construct<\/a>"],[0,7,"<a href=\"bizservice\/notifier.php.html#22\">HttpNotifier::notify<\/a>"],[0,1,"<a href=\"bizservice\/notifier.php.html#92\">NotifyHandler::__construct<\/a>"],[0,2,"<a href=\"bizservice\/notifier.php.html#98\">NotifyHandler::notify<\/a>"],[0,2,"<a href=\"bizservice\/notifier.php.html#113\">NotifyHandler::isSupport<\/a>"],[0,1,"<a href=\"bizservice\/stat_svc.php.html#10\">StatSvc::__construct<\/a>"],[0,1,"<a href=\"bizservice\/stat_svc.php.html#15\">StatSvc::getAll<\/a>"],[0,1,"<a href=\"bizservice\/stat_svc.php.html#20\">StatSvc::clearError<\/a>"],[0,1,"<a href=\"bizservice\/stat_svc.php.html#25\">StatSvc::incrError<\/a>"],[0,1,"<a href=\"bizservice\/timer_svc.php.html#10\">TimerSvc::__construct<\/a>"],[0,3,"<a href=\"bizservice\/timer_svc.php.html#26\">TimerSvc::add<\/a>"],[0,3,"<a href=\"bizservice\/timer_svc.php.html#49\">TimerSvc::update<\/a>"],[0,1,"<a href=\"bizservice\/timer_svc.php.html#66\">TimerSvc::getById<\/a>"],[0,1,"<a href=\"bizservice\/timer_svc.php.html#79\">TimerSvc::getByTimerId<\/a>"],[0,1,"<a href=\"bizservice\/timer_svc.php.html#92\">TimerSvc::delById<\/a>"],[0,1,"<a href=\"bizservice\/timer_svc.php.html#105\">TimerSvc::delByTimerId<\/a>"],[0,1,"<a href=\"bizservice\/timer_svc.php.html#115\">TimerSvc::getExpireTimer<\/a>"],[0,1,"<a href=\"bizservice\/timer_svc.php.html#123\">TimerSvc::delFromCronList<\/a>"],[0,17,"<a href=\"mechanism\/crontab_parse.php.html#24\">Crontab::parse<\/a>"],[0,5,"<a href=\"mechanism\/crontab_parse.php.html#134\">Crontab::_search<\/a>"],[0,15,"<a href=\"mechanism\/crontab_parse.php.html#165\">Crontab::_parseCronNumbers<\/a>"],[100,1,"<a href=\"mechanism\/intercept.php.html#7\">AutoCommit::begin<\/a>"],[100,1,"<a href=\"mechanism\/intercept.php.html#12\">AutoCommit::end<\/a>"],[100,1,"<a href=\"mechanism\/intercept.php.html#18\">AutoCommit::commitAndBegin<\/a>"],[100,1,"<a href=\"mechanism\/intercept.php.html#25\">AutoCommit::cancelCommit<\/a>"],[100,1,"<a href=\"mechanism\/intercept.php.html#30\">AutoCommit::_before<\/a>"],[100,2,"<a href=\"mechanism\/intercept.php.html#34\">AutoCommit::_after<\/a>"],[100,1,"<a href=\"mechanism\/intercept.php.html#43\">AutoCommit::_exception<\/a>"],[100,1,"<a href=\"mechanism\/intercept.php.html#48\">AutoCommit::log<\/a>"],[0,1,"<a href=\"mechanism\/occurdata.php.html#4\">OccurDate::stdDate<\/a>"],[0,1,"<a href=\"mechanism\/occurdata.php.html#8\">OccurDate::stdHourDate<\/a>"],[0,1,"<a href=\"mechanism\/occurdata.php.html#12\">OccurDate::simpleDate<\/a>"],[0,1,"<a href=\"mechanism\/occurdata.php.html#16\">OccurDate::isStdDate<\/a>"],[0,1,"<a href=\"mechanism\/occurdata.php.html#20\">OccurDate::format<\/a>"],[0,1,"<a href=\"mechanism\/occurdata.php.html#26\">OccurDate::today<\/a>"],[0,1,"<a href=\"mechanism\/occurdata.php.html#30\">OccurDate::yesterday<\/a>"],[0,1,"<a href=\"mechanism\/occurdata.php.html#34\">OccurDate::beforeHour<\/a>"],[0,2,"<a href=\"mechanism\/occurdata.php.html#38\">OccurDate::dayBefore<\/a>"],[0,2,"<a href=\"mechanism\/occurdata.php.html#43\">OccurDate::dayAfter<\/a>"],[0,2,"<a href=\"mechanism\/occurdata.php.html#48\">OccurDate::cutWeeks<\/a>"],[0,1,"<a href=\"mechanism\/occurdata.php.html#60\">OccurDate::dayCompare<\/a>"],[0,3,"<a href=\"mechanism\/occurdata.php.html#69\">OccurDate::isInScope<\/a>"],[0,4,"<a href=\"mechanism\/occurdata.php.html#79\">OccurDate::intersect<\/a>"],[0,1,"<a href=\"mechanism\/utilitys.php.html#4\">TimeUtil::mktime<\/a>"],[0,6,"<a href=\"mechanism\/utilitys.php.html#18\">NetUtil::getLocalIp<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
