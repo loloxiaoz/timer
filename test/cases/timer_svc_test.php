@@ -8,6 +8,7 @@ class TimerSvcTest extends PHPUnit_Framework_TestCase
     {
         $this->timerSvc = new TimerSvc();
         $this->appSvc = new AppSvc();
+        $this->appSvc->del($this->appName);
         $this->appSvc->add($this->appName);
     }
 
@@ -29,8 +30,8 @@ class TimerSvcTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($result);
 
         $this->assertTrue($this->timerSvc->delFromCronList($timer->timerId));
-        /*$result = $this->timerSvc->getExpireTimer();
-        $this->assertNull($result);*/
+        $result = $this->timerSvc->getExpireTimer();
+        $this->assertNull($result);
         $result = $this->timerSvc->getByTimerId($timer->timerId);
         $this->assertNotNull($result);
 
@@ -43,15 +44,14 @@ class TimerSvcTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($timer);
         $result = $this->timerSvc->getByTimerId($timer->timerId);
         $this->assertNotNull($result);
-        /*$result = $this->timerSvc->getExpireTimer();
-        $this->assertNull($result);*/
+        $result = $this->timerSvc->getExpireTimer();
+        $this->assertNull($result);
 
         // 更新这个10秒后执行的任务
         $timer->expireTime = date('Y-m-d H:i:s', time());
         $this->assertTrue($this->timerSvc->update($timer));
-
-        /*$result = $this->timerSvc->getExpireTimer();
-        $this->assertNotNull($result);*/
+        $result = $this->timerSvc->getExpireTimer();
+        $this->assertNotNull($result);
 
         $this->assertTrue($this->timerSvc->delById($this->appName,$this->id));
     }

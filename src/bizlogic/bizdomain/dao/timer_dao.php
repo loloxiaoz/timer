@@ -54,7 +54,7 @@ class TimerDao extends RedisBaseDao
         return $timer;
     }
 
-    public function get($timeId)
+    public function get($timerId)
     {
         $timerKey   = $this->getTimerKey($timerId);
         $db         = KVStore::getInstance(KVStore::PLATOV2);

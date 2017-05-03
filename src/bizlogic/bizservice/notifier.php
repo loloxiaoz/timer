@@ -41,16 +41,17 @@ class HttpNotifier implements Notifier
         $httpConf->proxy   = null;
         $httpConf->port    = $port;
         $httpConf->timeout = $timeout;
-        $httpConf->server  = "mara_cron";
-        $httpConf->caller  = $host;
+        $httpConf->server  = null;
+        $httpConf->caller  = "mara_cron";
         $httpClient = new XHttpCaller($httpConf);
 
         if ($method == "get") {
-            $result = $httpClient->get($url,$timeout);
+            $result = $httpClient->get($url);
         } elseif ($method == "post") {
-            $postData = $params["data"];
-            $result = $httpClient->post($url,$postData,$timeout);
+            $postData   = $params["data"];
+            $result     = $httpClient->post($url,$postData);
         }
+        $result = XRestResult::ok($result);
 
         // 所有没有返回结果的，都会被当成失败(约定的规则)
         if (empty($result)) {
@@ -63,24 +64,13 @@ class HttpNotifier implements Notifier
             return true;
         }
 
-        // 希望没有应用方给了错误的url，或者错误的expect result，有的话莫怪多调了。。。
-
-        // 规则是：{"errno":"","msg":"","data":""}
-        $obj = json_decode($result);
-        if ($obj->errno) {
-            // errno 不为0，表示调用有问题
-            $this->logger->warn("http call fail, errno is not 0, timer=" . json_encode($timer->getPropArray()) . " result=${result}");
-            return false;
-        }
 
         // 提取结果的data数据进行匹配
-        if ($expectResult != $obj->data) {
+        if ($expectResult != $result) {
             $this->logger->warn("http call fail, result not match, timer=" . json_encode($timer->getPropArray()) . " result=${result}");
             return false;
         }
-
         return true;
-
     }
 
     private $logger;

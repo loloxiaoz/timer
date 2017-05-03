@@ -1,6 +1,6 @@
 <?php
 
-//@REST_RULE: /cron/stat/$method
+//@REST_RULE: /stat/$method
 class CronStatRest extends XRuleService implements XService
 {
     public function __construct()

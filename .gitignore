@@ -4,13 +4,12 @@ _act*
 *.swp
 *.tmp
 ._pylon.dat
-.gd*
 conf/used
 tmp
 cscop*
 runtime/*
 run/*
-avatar_origin/*
 _notes
 .rigger.dat
 phpunit.xml.dist
+run.log

@@ -1,6 +1,6 @@
 <?php
 
-//@REST_RULE: /cron/timer/$method
+//@REST_RULE: /timer/$method
 class CronTimerRest extends XRuleService implements XService
 {
     public function __construct()
@@ -51,6 +51,20 @@ class CronTimerRest extends XRuleService implements XService
         $timeId = $request->timeid;
         Contract::notNull($timeId,"timeId不能为空");
         $result = $this->timerSvc->delByTimerId($timerId);
+        if($result){
+            $response->success("success");
+        } else {
+            $response->success("fail");
+        }
+    }
+
+    public function delByApp($xcontext, $request, $response)
+    {
+        $id     = $request->id;
+        $app    = $request->app;
+        Contract::notNull($id,"id不能为空");
+        Contract::notNull($app,"app不能为空");
+        $result = $this->timerSvc->delById($app,$id);
         if($result){
             $response->success("success");
         } else {

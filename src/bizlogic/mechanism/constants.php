@@ -9,7 +9,7 @@ class CronConstants
     const APP_TIMERS_SUFFIX = ".timers";    // 应用的定时任务列表
 
     // 定时任务回调超时控制
-    const DEFAULT_TIMEOUT = 1;              // 默认超时
+    const DEFAULT_TIMEOUT = 5;              // 默认超时
     const DEFAULT_RETRY = 1;                // 默认重试次数
 
     // 任务队列
