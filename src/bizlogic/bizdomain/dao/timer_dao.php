@@ -167,7 +167,7 @@ class TimerDao extends RedisBaseDao
         //      如果没有加锁：
         //          进行加锁set，保存自己client的标示，并设置过期时间
 
-        $key        = "cron_lock";
+        $key        = "cron.lock";
         $redis      = KVStore::getInstance(KVStore::PLATOV2);
         $isLock    = $redis->setnx($key, time()+CronConstants::LOCK_EXPIRE);
         // 不能获取锁
@@ -201,8 +201,9 @@ class TimerDao extends RedisBaseDao
 
     static public function getAppName($timerId)
     {
-        list($appName,$id) = explode("_",$timerId);
-        return $appName;
+        $names = explode("_",$timerId);
+        array_pop($names);
+        return implode("_",$names);
     }
 
     static public function getTimerId($appName,$id)

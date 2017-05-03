@@ -9,8 +9,8 @@ $retry = 2;
 while(($retry--) > 0){
     try {
         $redis = KVStore::getInstance(KVStore::PLATOV2);
-        $redis->set('mara_cron.test',22);
-        $res = $redis->get('mara_cron.test');
+        $redis->set('cron.monitor',22);
+        $res = $redis->get('cron.monitor');
         if($res == 22) {
             echo "ok";
             return;

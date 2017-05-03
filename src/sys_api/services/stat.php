@@ -9,7 +9,7 @@ class CronStatRest extends XRuleService implements XService
         $this->logger = XLogKit::logger("scope");
     }
 
-    public function get_all($xcontext, $request, $response)
+    public function all($xcontext, $request, $response)
     {
         $stats = $this->statSvc->getAll();
         $response->success(json_encode($stats));
