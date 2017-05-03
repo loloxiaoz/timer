@@ -1,38 +1,29 @@
 <?php
-/*
- * @brief 
- *
- * @author maijunsheng
- */
-class cron_stat extends XSimpleRest implements XService 
-{       
+
+//@REST_RULE: /cron/stat/$method
+class CronStatRest extends XRuleService implements XService
+{
     public function __construct()
     {
         $this->statSvc = new StatSvc();
         $this->logger = XLogKit::logger("scope");
     }
 
-    public function get_all($request,$xcontext) 
+    public function get_all($xcontext, $request, $response)
     {
         $stats = $this->statSvc->getAll();
-
-        if ($stats) {
-            $xcontext->_result->success(json_encode($stats));
-        } else {
-            $xcontext->_result->success("");
-        }
+        $response->success(json_encode($stats));
     }
 
-    public function clear($request,$xcontext) 
+    public function clear($xcontext, $request, $response)
     {
         $result = $this->statSvc->clear();
         if ($result) {
-            $xcontext->_result->success("success");
+            $response->success("success");
         } else {
-            $xcontext->_result->success("fail");
+            $response->success("fail");
         }
     }
-
     private $statSvc;
     private $logger;
 }

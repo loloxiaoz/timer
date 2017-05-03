@@ -7,7 +7,7 @@ class TimerDao extends RedisBaseDao
 {
     static public $ins;
 
-    public function ins()
+    public static function ins()
     {
         if(self::$ins == null) {
             self::$ins = new TimerDao();
@@ -57,6 +57,7 @@ class TimerDao extends RedisBaseDao
     public function get($timeId)
     {
         $timerKey   = $this->getTimerKey($timerId);
+        $db         = KVStore::getInstance(KVStore::PLATOV2);
         $result     = $db->get($timerKey);
         if (empty($result)) {
             return;
@@ -67,9 +68,10 @@ class TimerDao extends RedisBaseDao
 
     public function update($timer)
     {
-        $appName = $timer->app;
-        $timerId = $timer->timerId;
-        $value = json_encode($timer->getPropArray());
+        $appName    = $timer->app;
+        $timerId    = $timer->timerId;
+        $value      = json_encode($timer->getPropArray());
+        $db         = KVStore::getInstance(KVStore::PLATOV2);
 
         try {
             // update timer
@@ -92,6 +94,7 @@ class TimerDao extends RedisBaseDao
 
     public function del($timerId)
     {
+        $db      = KVStore::getInstance(KVStore::PLATOV2);
         $appName = TimerDao::getAppName($timerId);
         try {
             $db->zrem($this->getCronListKey(),$timerId);
@@ -119,8 +122,9 @@ class TimerDao extends RedisBaseDao
 
     public function delFromCronList($timerId)
     {
+        $db   = KVStore::getInstance(KVStore::PLATOV2);
         try {
-            $timerId = $params[0];
+            $timerId = $timerId;
             $db->zrem($this->getCronListKey(),$timerId);
         } catch (Exception $e) {
             $this->logger->error("del timer from cron list fail, app {$appName} timer[{$timerId}] errmsg=" . $e->getMessage());
@@ -131,6 +135,7 @@ class TimerDao extends RedisBaseDao
 
     public function getExpireTimer()
     {
+        $db   = KVStore::getInstance(KVStore::PLATOV2);
         // 从调度队列获取到点的执行任务id
         $data = $db->zRangeByScore($this->getCronListKey(),0,time(),array('limit'=>array(0,1)));
         if (empty($data)) {
@@ -152,7 +157,7 @@ class TimerDao extends RedisBaseDao
         return new Timer($timerId,$arrs);
     }
 
-    public function lockCronList($lockClient)
+    public function lockCronList()
     {
         // 进行加锁，如果已经有其他client加锁，那么返回其他client的标示，不然返回这个client的标示
         // 获取cron_lock是否已经有人加锁
@@ -161,28 +166,37 @@ class TimerDao extends RedisBaseDao
         //          如果加锁对象是其他client，那么不做什么事情，返回加锁的那个client的标示o
         //      如果没有加锁：
         //          进行加锁set，保存自己client的标示，并设置过期时间
-        $lua_str = 'local lock_key = "cron_lock"; local old_value = redis.call("get", lock_key); if (old_value) then if (old_value == ARGV[1]) then redis.call("expire", lock_key, ARGV[2]); return ARGV[1]; else return old_value; end; else redis.call("set",lock_key,ARGV[1]); redis.call("expire",lock_key,ARGV[2]); return ARGV[1]; end';
 
-        $keys_values = Array($lockClient,CronConstants::LOCK_EXPIRE);
-        $result = $db->eval($lua_str,$keys_values,0);
-
-        $this->logger->debug("callLockCronList $lockClient $result");
-        return $result;
+        $key        = "cron_lock";
+        $redis      = KVStore::getInstance(KVStore::PLATOV2);
+        $isLock    = $redis->setnx($key, time()+CronConstants::LOCK_EXPIRE);
+        // 不能获取锁
+        if(!$isLock){
+            // 判断锁是否过期
+            $lockTime = $redis->get($key);
+            // 锁已过期，删除锁，重新获取
+            if(time()>=$lockTime){
+                $redis->del($key);
+                $isLock = $redis->setnx($key, time()+CronConstants::LOCK_EXPIRE);
+            }
+        }
+        $this->logger->debug("callLockCronList $isLock");
+        return $isLock? true : false;
     }
 
     public function getCronListKey()
     {
-        return CronConstants::CRON_LIST . $this->env;
+        return CronConstants::CRON_LIST;
     }
 
     public function getAppTimersKey($appName)
     {
-        return $appName . CronConstants::APP_TIMERS_SUFFIX . $this->env;
+        return $appName . CronConstants::APP_TIMERS_SUFFIX;
     }
 
     public function getTimerKey($timerId)
     {
-        return $timerId . CronConstants::TIMER_SUFFIX . $this->env;
+        return $timerId . CronConstants::TIMER_SUFFIX;
     }
 
     static public function getAppName($timerId)

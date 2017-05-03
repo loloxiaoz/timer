@@ -3,7 +3,7 @@
 /*
  * @brief 定时任务
  */
-class Timer extends PropertyObj
+class Timer extends XProperty
 {
     public function __construct($timerId,$arrs=array())
     {
@@ -11,7 +11,7 @@ class Timer extends PropertyObj
         $this->timerId = $timerId;
         if(!empty($arrs) && is_array($arrs))
         {
-            $prop = new PropertyObj($arrs);
+            $prop = new XProperty($arrs);
             $this->merge($prop);
         }
     }

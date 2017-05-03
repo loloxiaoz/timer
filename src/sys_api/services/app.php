@@ -1,62 +1,46 @@
 <?php
-/*
- * @brief 
- *
- * @author maijunsheng
- */
-class cron_app extends XSimpleRest implements XService 
-{       
+
+//@REST_RULE: /cron/app/$method
+class CronAppRest extends XRuleService implements XService
+{
     public function __construct()
     {
         $this->appSvc = new AppSvc();
         $this->logger = XLogKit::logger("scope");
     }
 
-    public function add($request,$xcontext) 
+    public function add($xcontext, $request, $response)
     {
         $name = $request->name;
-        if (!$name) {
-            $xcontext->_result->error("name is null", CronErrCode::PARAM_ERROR,401);
-            return;
-        }
-
+        Contract::notNull($name,CronErrCode::PARAM_ERROR);
         $app = $this->appSvc->add($name,$request->comment);
-        $xcontext->_result->success(json_encode($app->getPropArray()));
+        $response->success(json_encode($app->getPropArray()));
     }
 
-    public function get($request,$xcontext) 
+    public function get($xcontext, $request, $response)
     {
         $name = $request->name;
-        if (!$name) {
-            $xcontext->_result->error("name is null", CronErrCode::PARAM_ERROR,401);
-            return;
-        }
-
+        Contract::notNull($name,CronErrCode::PARAM_ERROR);
         $app = $this->appSvc->get($name);
-
         if ($app) {
-            $xcontext->_result->success(json_encode($app->getPropArray()));
+            $response->success(json_encode($app->getPropArray()));
         } else {
-            $xcontext->_result->success("");
+            $response->success("");
         }
     }
 
-    public function del($request,$xcontext) 
+    public function del($xcontext, $request, $response)
     {
         $name = $request->name;
-        if (!$name) {
-            $xcontext->_result->error("name is null", CronErrCode::PARAM_ERROR,401);
-            return;
-        }
-
+        Contract::notNull($name,CronErrCode::PARAM_ERROR);
         $result = $this->appSvc->del($name);
         if ($result) {
-            $xcontext->_result->success("success");
+            $response->success("success");
         } else {
-            $xcontext->_result->success("fail");
+            $response->success("fail");
         }
     }
+
     private $appSvc;
     private $logger;
 }
-

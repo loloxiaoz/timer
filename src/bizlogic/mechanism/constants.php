@@ -16,7 +16,7 @@ class CronConstants
     const EXPIRE_QUEUE_NAME = "yx_cron_default";  // 待回调的任务队列
 
     // 锁相关
-    const LOCK_EXPIRE = 30;                       // 锁超时时间
+    const LOCK_EXPIRE = 1;                       // 锁超时时间
 
     // 统计相关
     const CRON_STAT_ERROR = "cron.stats.error"; // 统计信息

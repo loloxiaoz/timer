@@ -2,15 +2,20 @@
 /*
  * @brief 应用信息存储(redis)
  */
-class BaseDao
+class RedisBaseDao
 {
     static public $ins;
-    public function ins()
+    public static function ins()
     {
         if(self::$ins == null) {
-            self::$ins = new AppDao();
+            self::$ins = new RedisBaseDao();
         }
         return self::$ins;
+    }
+
+    protected function __construct()
+    {
+        $this->logger = XLogKit::logger("scope");
     }
 
     public function add($app)

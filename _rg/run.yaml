@@ -89,7 +89,7 @@ _sys:
             - !R.using
                 modul : "mara_unit"
                 args  : !R.vars
-                    INCLUDE_PATH: "${prj_root}/src/sys_api:${BASE_INCLUDE}:${PRJ_ROOT}/test/"
+                    INCLUDE_PATH: "${BASE_INCLUDE}:${PRJ_ROOT}/test/"
 
     -  !R.system
         _name : "console"
@@ -101,10 +101,6 @@ _sys:
                 args  : !R.vars
                     INCLUDE_PATH : "${PRJ_ROOT}/src/sys_console:${BASE_INCLUDE}"
             - !R.daemon_php
-                script : "${PRJ_ROOT}/src/apps/console/mara_cron_worker.php"
-                MODULES: "${MODULES}:${PRJ_ROOT}/src/apps/console"
-                worker : 1
-            - !R.daemon_php
-                script : "${PRJ_ROOT}/src/apps/console/mara_cron_watcher.php"
-                MODULES: "${MODULES}:${PRJ_ROOT}/src/apps/console"
+                script : "${PRJ_ROOT}/src/sys_${SYS_NAME}/cron_watcher.php"
+                tag    : "watcher"
                 worker : 1

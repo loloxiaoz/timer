@@ -4,7 +4,7 @@
  * @brief 应用信息
  *
  */
-class App extends PropertyObj
+class App extends XProperty
 {
     public function __construct($name,$arrs=array())
     {
@@ -12,7 +12,7 @@ class App extends PropertyObj
         $this->name = $name;
         if(!empty($arrs) && is_array($arrs))
         {
-            $prop = new PropertyObj($arrs);
+            $prop = new XProperty($arrs);
             $this->merge($prop);
         }
     }

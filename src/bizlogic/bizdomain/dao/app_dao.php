@@ -6,7 +6,7 @@
 class AppDao extends RedisBaseDao
 {
     static public $ins;
-    public function ins()
+    public static function ins()
     {
         if(self::$ins == null) {
             self::$ins = new AppDao();

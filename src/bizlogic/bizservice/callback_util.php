@@ -77,5 +77,3 @@ class CallbackUtil
     const HTTP_GET = "get";
     const HTTP_POST = "post";
 }
-
-

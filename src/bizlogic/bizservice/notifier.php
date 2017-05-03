@@ -1,5 +1,4 @@
 <?php
-require_once("/home/q/php/gsdk_base/sdk_base.php");
 
 /*
  * @brief 回调
@@ -22,13 +21,13 @@ class HttpNotifier implements Notifier
 
     public function notify($timer)
     {
-        $callback = $timer->callback;
-        $params = $callback["params"];
-        $domain = $params["domain"];
-        $host = $params["host"];
-        $port = $params["port"];
-        $url  = $params["url"];
-        $method = $params["method"];
+        $callback   = $timer->callback;
+        $params     = $callback["params"];
+        $domain     = $params["domain"];
+        $host       = $params["host"];
+        $port       = $params["port"];
+        $url        = $params["url"];
+        $method     = $params["method"];
 
         $timeout = empty($callback["timeout"]) ? CronConstants::DEFAULT_TIMEOUT : $callback["timeout"];
 
@@ -37,7 +36,14 @@ class HttpNotifier implements Notifier
         $expectResult = $params["result"];
         $result = ""; // 返回的结果
 
-        $httpClient = new GHttpCall($domain,$this->logger,null,$port,$timeout,"mara_cron",$host);
+        $httpConf = new XHttpConf();
+        $httpConf->conf($domain, $this->logger);
+        $httpConf->proxy   = null;
+        $httpConf->port    = $port;
+        $httpConf->timeout = $timeout;
+        $httpConf->server  = "mara_cron";
+        $httpConf->caller  = $host;
+        $httpClient = new XHttpCaller($httpConf);
 
         if ($method == "get") {
             $result = $httpClient->get($url,$timeout);
@@ -46,11 +52,9 @@ class HttpNotifier implements Notifier
             $result = $httpClient->post($url,$postData,$timeout);
         }
 
-        unset($httpCall);
-
         // 所有没有返回结果的，都会被当成失败(约定的规则)
         if (empty($result)) {
-            $this->logger->warn("[".__CLASS__."::".__FUNCTION__."] http call fail, timer=" . json_encode($timer->getPropArray()));
+            $this->logger->warn("http call fail, timer=" . json_encode($timer->getPropArray()));
             return false;
         }
 
@@ -65,13 +69,13 @@ class HttpNotifier implements Notifier
         $obj = json_decode($result);
         if ($obj->errno) {
             // errno 不为0，表示调用有问题
-            $this->logger->warn("[".__CLASS__."::".__FUNCTION__."] http call fail, errno is not 0, timer=" . json_encode($timer->getPropArray()) . " result=${result}");
+            $this->logger->warn("http call fail, errno is not 0, timer=" . json_encode($timer->getPropArray()) . " result=${result}");
             return false;
         }
 
         // 提取结果的data数据进行匹配
         if ($expectResult != $obj->data) {
-            $this->logger->warn("[".__CLASS__."::".__FUNCTION__."] http call fail, result not match, timer=" . json_encode($timer->getPropArray()) . " result=${result}");
+            $this->logger->warn("http call fail, result not match, timer=" . json_encode($timer->getPropArray()) . " result=${result}");
             return false;
         }
 

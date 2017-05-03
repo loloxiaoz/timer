@@ -1,29 +1,52 @@
 <?php
-class AutoCommit  implements XScopeInterceptor
+class AutoCommit  extends XInterceptor
 {
     static $aps=null;
     private $needCommit=true;
-    public function  _before($request ,$xcontext)
+
+    static public function begin()
     {
-        self::$aps = AppSession::begin();
-        $xcontext->_autocommit=$this;
+        static::$aps = XAppSession::begin();
     }
-    public function commitAndBegin()
+
+    static public function end()
     {
-        self::$aps->commit();
-        self::$aps=null;
-        self::$aps = AppSession::begin();
+        static::$aps->commit();
+        static::$aps=null;
     }
-    public function cancleCommit()
+
+    static public function commitAndBegin()
+    {
+        static::$aps->commit();
+        static::$aps = null;
+        static::$aps = XAppSession::begin();
+    }
+
+    static public function cancelCommit()
+    {
+        static::$aps=null;
+    }
+
+    public function _before($xcontext,$request,$response)
+    {
+        static::$aps = XAppSession::begin();
+    }
+    public function _after($xcontext,$request,$response)
+    {
+        if($this->needCommit)
+        {
+            static::$aps->commit();
+        }
+        static::$aps=null;
+        $xcontext->autocommit=null;
+    }
+    public function _exception($e, $xcontext, $request, $response)
     {
         $this->needCommit = false;
     }
-    public function _after($request,$xcontext)
+
+    static function log($action)
     {
-        if($this->needCommit)
-            self::$aps->commit();
-        self::$aps=null;
-        $xcontext->_autocommit=null;
+        LogKit::main()->info("app session {$action}".getmypid());
     }
 }
-?>
