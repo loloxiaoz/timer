@@ -16,7 +16,7 @@ class CronTimerRest extends XRuleService implements XService
         $time = $request->time;
         $rule = $request->rule;
         Contract::isTrue(!empty($time),"must has time param");
-        Contract::isTrue($time<=cron_timer::MAX_TIMESTAMP,"time must < 2147454847 (2038-01-19 03:14:07), but was {$time}");
+        Contract::isTrue($time<=CronTimerRest::MAX_TIMESTAMP,"time must < 2147454847 (2038-01-19 03:14:07), but was {$time}");
         $callback = $request->callback;
         Contract::notNull($callback,"callback is null");
         $callback = json_decode($callback,true);
@@ -48,7 +48,7 @@ class CronTimerRest extends XRuleService implements XService
 
     public function del($xcontext, $request, $response)
     {
-        $timeId = $request->timeid;
+        $timerId = $request->timerid;
         Contract::notNull($timeId,"timeId不能为空");
         $result = $this->timerSvc->delByTimerId($timerId);
         if($result){
