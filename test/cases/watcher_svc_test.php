@@ -24,7 +24,7 @@ class WatcherSvcTest extends PHPUnit_Framework_TestCase
     {
         $callbackDTO = new CallbackDTO;
         $callbackDTO->method    = "get";
-        $callbackDTO->domain    = "api.match.mararun.con";
+        $callbackDTO->domain    = "api.match.mararun.cn";
         $callbackDTO->port      = 8086;
         $callbackDTO->url       = "/monitor";
         $callbackDTO->retry     = 5;
@@ -33,7 +33,7 @@ class WatcherSvcTest extends PHPUnit_Framework_TestCase
         $sdkSvc = CrontabClient::stdSvc();
         $sdkSvc->delApp($this->appName);
         $sdkSvc->addApp($this->appName);
-        $timer = $sdkSvc->addTimer($this->appName,time()+20,$callbackDTO);
+        $timer = $sdkSvc->addTimer($this->appName,time()+5,$callbackDTO);
         $this->assertNotNull($timer);
     }
 }
