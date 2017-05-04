@@ -3,12 +3,12 @@
 ## 创建回调对象
 `````
 $callbackDTO            = new CallbackDTO;
-$callbackDTO->method    = "get";
+$callbackDTO->method    = "get";                    //http方法
 $callbackDTO->domain    = "api.match.mararun.cn";
 $callbackDTO->port      = 8086;
 $callbackDTO->url       = "/monitor";
-$callbackDTO->retry     = 5;
-$callbackDTO->result    = array("status"=>"OK");
+$callbackDTO->retry     = 5;                        //重试次数
+$callbackDTO->result    = array("status"=>"OK");    //期望结果
 `````
 
 ## 创建应用
@@ -21,5 +21,6 @@ $sdkSvc->addApp($appName);
 
 ## 创建定时器
 `````
-$timer = $sdkSvc->addTimer($appName,time()+20,$callbackDTO);
+$expireTime = time()+20; //20s后生效
+$timer = $sdkSvc->addTimer($appName,$expireTime,$callbackDTO);
 `````
