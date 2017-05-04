@@ -1,7 +1,8 @@
 定时任务系统
 
 ````
-$callbackDTO = new CallbackDTO;
+$appName        = "mara_match";
+$callbackDTO    = new CallbackDTO;
 $callbackDTO->method    = "get";
 $callbackDTO->domain    = "api.match.mararun.cn";
 $callbackDTO->port      = 8086;
@@ -10,7 +11,7 @@ $callbackDTO->retry     = 5;
 $callbackDTO->result    = array("status"=>"OK");
 
 $sdkSvc = CrontabClient::stdSvc();
-$sdkSvc->delApp($this->appName);
-$sdkSvc->addApp($this->appName);
-$timer = $sdkSvc->addTimer($this->appName,time()+20,$callbackDTO);
+$sdkSvc->delApp($appName);
+$sdkSvc->addApp($appName);
+$timer = $sdkSvc->addTimer($appName,time()+20,$callbackDTO);
 
