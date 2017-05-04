@@ -1,5 +1,6 @@
 # 定时任务系统
 
+`````
 ## 创建回调对象
 $callbackDTO            = new CallbackDTO;
 $callbackDTO->method    = "get";
@@ -17,4 +18,5 @@ $sdkSvc->addApp($appName);
 
 ## 创建定时器
 $timer = $sdkSvc->addTimer($appName,time()+20,$callbackDTO);
+`````
 
