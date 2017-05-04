@@ -45,11 +45,6 @@ class CallbackUtil
             throw new Exception("callback params: domain is null");
         }
 
-        $host = $params["host"];
-        if (!$host) {
-            throw new Exception("callback params: host is null");
-        }
-
         $port = $params["port"];
         if (!$port || !is_numeric($port)) {
             throw new Exception("callback params: port is null or is not numeric");
