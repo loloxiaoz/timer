@@ -47,7 +47,7 @@ class CronEventHandler
         if (!$result) {
             // 回调失败
             $this->logger->error("timer notify fail, msg=" . json_encode($msg) . " timer=" . json_encode($timer->getPropArray()));
-            StatDao::ins()->incrError($app,CronConstants::CALLBACK_ERROR);
+            StatDao::ins()->incrError($timerId,CronConstants::CALLBACK_ERROR);
 
             return $this->nofityRetry($timer);
         }
@@ -99,8 +99,8 @@ class CronEventHandler
         $expireTimestamp    = TimeUtil::mktime($timer->expireTime) + CronConstants::RETYR_INTERVAL;  // 下一次重试时间
         $timer->expireTime  = date('Y-m-d H:i:s', $expireTimestamp);
         $timer->calltimes   = $currentCalltimes;
-        $result = $this->timerSvc->update($timer);  // 调用失败，重试
-        return $result;
+        $this->timerSvc->delFromCronList($timer->timerId);
+        return  $this->timerSvc->update($timer);  // 调用失败，重试
     }
 
     public function handle($msg)

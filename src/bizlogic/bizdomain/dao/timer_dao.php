@@ -159,6 +159,7 @@ class TimerDao extends RedisBaseDao
 
     public function lockCronList()
     {
+        // 原代码是eval一段lua代码，但阿里云无法使用eval指令
         // 进行加锁，如果已经有其他client加锁，那么返回其他client的标示，不然返回这个client的标示
         // 获取cron_lock是否已经有人加锁
         //      如果有加锁:

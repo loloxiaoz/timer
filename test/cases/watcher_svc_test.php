@@ -14,7 +14,7 @@ class WatcherSvcTest extends PHPUnit_Framework_TestCase
 
     public function test()
     {
-        $callback = array("type"=>"http","params"=>array("result"=>array("status"=>"OK"),"domain"=>"api.match.mararun.cn","port"=>$_SERVER["PORT"],"url"=>"/monitor","method"=>"get"));
+        $callback = array("type"=>"http","retry"=>3,"params"=>array("result"=>array("status"=>"OK"),"domain"=>"api.match.mararun.con","port"=>$_SERVER["PORT"],"url"=>"/monitor","method"=>"get"));
         // 增加当前到期的任务
         $timer = $this->timerSvc->add($this->appName,null,time()+2,null,$callback);
         $this->assertNotNull($timer);

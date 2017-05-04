@@ -19,7 +19,7 @@ class Timer extends XProperty
     static public function create($appName,$id,$rule,$expireTime,$callback)
     {
         if (empty($id)) {
-            $id = time()+rand(100000,999999);
+            $id = date("YmdHis").rand(10000,99999);
         }
 
         $timerId = TimerDao::getTimerId($appName,$id);

@@ -70,12 +70,6 @@ class Watcher
         $msg        = json_encode(array("timerId"=>$timer->timerId,"time"=>date("Y-m-d H:i:s"),"expireTime"=>$timer->expireTime));
         $handleSvc  = new CronEventHandler();
         $handleSvc->handle($msg);
-
-        // 从调度队列中删除
-        $r = $this->timerSvc->delFromCronList($timer->timerId);
-        if (!$r) {
-            $this->logger->warn("timer {$timer->timerId} remove from cron list fail");
-        }
         $this->logger->info("timer {$timer->timerId} expire. data=" . $msg);
     }
 

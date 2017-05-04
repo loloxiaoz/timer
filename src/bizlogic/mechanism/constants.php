@@ -12,9 +12,6 @@ class CronConstants
     const DEFAULT_TIMEOUT = 5;              // 默认超时
     const DEFAULT_RETRY = 1;                // 默认重试次数
 
-    // 任务队列
-    const EXPIRE_QUEUE_NAME = "yx_cron_default";  // 待回调的任务队列
-
     // 锁相关
     const LOCK_EXPIRE = 1;                       // 锁超时时间
 
