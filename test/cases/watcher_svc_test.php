@@ -33,7 +33,7 @@ class WatcherSvcTest extends PHPUnit_Framework_TestCase
         $sdkSvc = CrontabClient::stdSvc();
         $sdkSvc->delApp($this->appName);
         $sdkSvc->addApp($this->appName);
-#        $timer = $sdkSvc->addTimer($this->appName,time()+20,$callbackDTO);
+        $timer = $sdkSvc->addTimer($this->appName,time()+20,$callbackDTO);
         $this->assertNotNull($timer);
     }
 }

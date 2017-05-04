@@ -19,7 +19,6 @@ class CronTimerRest extends XRuleService implements XService
         Contract::isTrue($time<=CronTimerRest::MAX_TIMESTAMP,"time must < 2147454847 (2038-01-19 03:14:07), but was {$time}");
         $callback = $request->callback;
         Contract::notNull($callback,"callback is null");
-        $callback = json_decode($callback,true);
         Contract::isTrue(CallbackUtil::isValid($callback),"callback format error");
 
         $id     = $request->id; // 如果应用方没有提供id，那么系统将自动生成
