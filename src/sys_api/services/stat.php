@@ -12,7 +12,7 @@ class CronStatRest extends XRuleService implements XService
     public function all($xcontext, $request, $response)
     {
         $stats = $this->statSvc->getAll();
-        $response->success(json_encode($stats));
+        $response->success($stats);
     }
 
     public function clear($xcontext, $request, $response)
