@@ -1,18 +1,8 @@
 _dev:
     - !C.project
-        name : "mara_cron"
+        name : "timer"
         root : "./"
     - !C.version
         file : "src/version.txt"
     - !C.git
-        remote : "git@git.mararun.cn:mara/mara_cron.git"
-    - !C.sonar
-        runner   : "/data/sonar-scanner/bin/sonar-scanner"
-        qube     : "http://10.26.101.134:9000"
-        src      : "src"
-        language : "php"
-        config   :
-            - "sonar.login=mara"
-            - "sonar.password=NzZhY2Q2ZTA5Nzk4Zjc0YjZhNWM1NTEw"
-            - "sonar.php.coverage.reportPath=test/reports/phpunit.coverage.xml"
-            - "sonar.php.tests.reportPath=test/reports/phpunit.report.xml"
+        remote : "git@github.com:loloxiaoz/timer.git"

@@ -4,7 +4,7 @@
 `````
 $callbackDTO            = new CallbackDTO;
 $callbackDTO->method    = "get";                    //http方法
-$callbackDTO->domain    = "api.match.mararun.cn";
+$callbackDTO->domain    = "api.match.loloxiaoz.com";
 $callbackDTO->port      = 8086;
 $callbackDTO->url       = "/monitor";
 $callbackDTO->retry     = 5;                        //重试次数
@@ -13,7 +13,7 @@ $callbackDTO->result    = array("status"=>"OK");    //期望结果
 
 ## 创建应用
 `````
-$appName    = "mara_match";
+$appName    = "match";
 $sdkSvc     = CrontabClient::stdSvc();
 $sdkSvc->delApp($appName);
 $sdkSvc->addApp($appName);

@@ -42,7 +42,7 @@ class HttpNotifier implements Notifier
         $httpConf->port    = $port;
         $httpConf->timeout = $timeout;
         $httpConf->server  = null;
-        $httpConf->caller  = "mara_cron";
+        $httpConf->caller  = "cron";
         $httpClient = new XHttpCaller($httpConf);
 
         if ($method == "get") {

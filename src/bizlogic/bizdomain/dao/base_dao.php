@@ -23,7 +23,7 @@ class RedisBaseDao
         $name   = $app->name;
         $arrs   = $app->getPropArray();
         $value  = json_encode($arrs);
-        $redis  = KVStore::getInstance(KVStore::PLATOV2);
+        $redis  = KVStore::getInstance(KVStore::TIMER);
         if ($redis->hexists(CronConstants::APP_DB_NAME,$name)) {
             $this->logger->warn("app {$name} already exist");
             throw new Exception("app {$name} already exist");
@@ -33,13 +33,13 @@ class RedisBaseDao
 
     public function del($name)
     {
-        $redis  = KVStore::getInstance(KVStore::PLATOV2);
+        $redis  = KVStore::getInstance(KVStore::TIMER);
         return  $redis->hdel(CronConstants::APP_DB_NAME,$name);
     }
 
     public function get($name)
     {
-        $redis  = KVStore::getInstance(KVStore::PLATOV2);
+        $redis  = KVStore::getInstance(KVStore::TIMER);
         $result = $redis->hget(CronConstants::APP_DB_NAME,$name);
         if (empty($result)) {
             return ;
@@ -50,7 +50,7 @@ class RedisBaseDao
 
     public function isExist($name)
     {
-        $redis  = KVStore::getInstance(KVStore::PLATOV2);
+        $redis  = KVStore::getInstance(KVStore::TIMER);
         return $redis->hexists(CronConstants::APP_DB_NAME,$name);
     }
 }

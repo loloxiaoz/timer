@@ -18,7 +18,7 @@ class StatDao extends RedisBaseDao
     {
         $errorStatKey = $this->getErrorStatKey($app,$type);
         // 全局统计
-        $redis  = KVStore::getInstance(KVStore::PLATOV2);
+        $redis  = KVStore::getInstance(KVStore::TIMER);
         $redis->hincrby(CronConstants::CRON_STAT_ERROR,"total",1);
         $redis->hincrby(CronConstants::CRON_STAT_ERROR,$errorStatKey,1);
         return true;
@@ -26,14 +26,14 @@ class StatDao extends RedisBaseDao
 
     public function getAllStat()
     {
-        $redis  = KVStore::getInstance(KVStore::PLATOV2);
+        $redis  = KVStore::getInstance(KVStore::TIMER);
         $result = $redis->hgetall(CronConstants::CRON_STAT_ERROR);
         return array(CronConstants::CRON_STAT_ERROR=>$result);
     }
 
     public function clearError()
     {
-        $redis  = KVStore::getInstance(KVStore::PLATOV2);
+        $redis  = KVStore::getInstance(KVStore::TIMER);
         $redis->del(CronConstants::CRON_STAT_ERROR);
         return true;
     }

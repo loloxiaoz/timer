@@ -22,7 +22,7 @@ class TimerDao extends RedisBaseDao
         $value      = json_encode($timer->getPropArray());
 
         // 检查应用是否已经注册
-        $db = KVStore::getInstance(KVStore::PLATOV2);
+        $db = KVStore::getInstance(KVStore::TIMER);
         if (!$db->hexists(CronConstants::APP_DB_NAME,$appName)) {
             $this->logger->warn("app {$appName} not exist");
             throw new Exception("app '{$appName}' have not registry");
@@ -57,7 +57,7 @@ class TimerDao extends RedisBaseDao
     public function get($timerId)
     {
         $timerKey   = $this->getTimerKey($timerId);
-        $db         = KVStore::getInstance(KVStore::PLATOV2);
+        $db         = KVStore::getInstance(KVStore::TIMER);
         $result     = $db->get($timerKey);
         if (empty($result)) {
             return;
@@ -71,7 +71,7 @@ class TimerDao extends RedisBaseDao
         $appName    = $timer->app;
         $timerId    = $timer->timerId;
         $value      = json_encode($timer->getPropArray());
-        $db         = KVStore::getInstance(KVStore::PLATOV2);
+        $db         = KVStore::getInstance(KVStore::TIMER);
 
         try {
             // update timer
@@ -94,7 +94,7 @@ class TimerDao extends RedisBaseDao
 
     public function del($timerId)
     {
-        $db      = KVStore::getInstance(KVStore::PLATOV2);
+        $db      = KVStore::getInstance(KVStore::TIMER);
         $appName = TimerDao::getAppName($timerId);
         try {
             $db->zrem($this->getCronListKey(),$timerId);
@@ -122,7 +122,7 @@ class TimerDao extends RedisBaseDao
 
     public function delFromCronList($timerId)
     {
-        $db   = KVStore::getInstance(KVStore::PLATOV2);
+        $db   = KVStore::getInstance(KVStore::TIMER);
         try {
             $timerId = $timerId;
             $db->zrem($this->getCronListKey(),$timerId);
@@ -135,7 +135,7 @@ class TimerDao extends RedisBaseDao
 
     public function getExpireTimer()
     {
-        $db   = KVStore::getInstance(KVStore::PLATOV2);
+        $db   = KVStore::getInstance(KVStore::TIMER);
         // 从调度队列获取到点的执行任务id
         $data = $db->zRangeByScore($this->getCronListKey(),0,time(),array('limit'=>array(0,1)));
         if (empty($data)) {
@@ -169,7 +169,7 @@ class TimerDao extends RedisBaseDao
         //          进行加锁set，保存自己client的标示，并设置过期时间
 
         $key        = "cron.lock";
-        $redis      = KVStore::getInstance(KVStore::PLATOV2);
+        $redis      = KVStore::getInstance(KVStore::TIMER);
         $isLock    = $redis->setnx($key, time()+CronConstants::LOCK_EXPIRE);
         // 不能获取锁
         if(!$isLock){

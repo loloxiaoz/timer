@@ -8,7 +8,7 @@ $retry = 2;
 
 while(($retry--) > 0){
     try {
-        $redis = KVStore::getInstance(KVStore::PLATOV2);
+        $redis = KVStore::getInstance(KVStore::TIMER);
         $redis->set('cron.monitor',22);
         $res = $redis->get('cron.monitor');
         if($res == 22) {
